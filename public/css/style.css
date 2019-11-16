@@ -1,0 +1,45 @@
+.active{
+    color: #17a2b8;
+}
+a:hover{
+    text-decoration: none;
+}
+ul{
+    padding: 0;
+}
+li{
+    list-style: none;
+}
+.nav-profile-img {
+    width: 40px;
+    border: 1px solid #fff;
+}
+
+.small{
+    font-size: 14px;
+}
+
+.mission-content ul li,
+.requirements ul li,
+.about-us ul li{
+    list-style-type: disc;
+}
+
+.sticky-container{
+    text-align: center;
+    position: fixed;
+    bottom: 70px;
+    right: 40px;
+}
+#btn-circle{
+    width: 40px;
+    height: 40px;
+    background: #17a2b8;
+    border-radius: 50%;
+    color: #fff;
+    padding: .375rem 0.55rem;
+}
+
+.jobbo-card{
+    background-color: #dfdfdf;
+}

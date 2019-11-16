@@ -1,0 +1,69 @@
+Create symfony project:
+
+composer create-project symfony/skeleton <name project>
+
+
+Update composer dependencies:
+
+composer update
+
+
+Install a recipe:
+
+composer require <Name>
+
+
+
+Clear cache:
+
+php bin/console cache:clear
+
+
+
+See the services in the container:
+
+php bin/console debug:container
+
+
+DOCTRINE:
+
+install: 
+composer require symfony/orm-pack
+composer require --dev symfony/maker-bundle
+    
+
+    ENTITY:
+    
+    php bin/console make:entity
+
+    CONTROLLER
+php bin/console make:controller
+
+AUTHETICATOR
+php bin/console make:auth
+
+
+    DATABASE:
+
+    php bin/console doctrine:database:drop --force
+
+
+
+    php bin/console doctrine:database:create
+
+    php bin/console doctrine:migrations:migrate
+    y
+
+    php bin/console doctrine:schema:update --force
+
+
+    php bin/console doctrine:schema:validate
+
+    
+
+DATA FIXTURES
+
+php bin/console doctrine:fixtures:load
+
+
+
