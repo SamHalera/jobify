@@ -18,6 +18,8 @@ composer require profiler --dev
 
 composer require debug --dev
 
+composer require symfony/maker-bundle --dev
+
 composer require swiftmailer-bundle
 
 

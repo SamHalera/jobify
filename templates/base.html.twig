@@ -38,7 +38,7 @@
 							<a class='nav-link' href="">Accueil</a>
 						</li>
 						<li class="nav-item">
-							<a class='nav-link' href="">Annonces</a>
+							<a class='nav-link' href="{{path("app_jobs_list")}}">Annonces</a>
 						</li>
 
 						<li class="nav-item">
@@ -128,8 +128,9 @@
 
 		{% endblock %}
 
-		<div class='container-fluid'> {% block body %}{% endblock %}
-			</div>
+		<div class='container-fluid'> 
+			{% block body %}{% endblock %}
+		</div>
 
 			<hr>
 

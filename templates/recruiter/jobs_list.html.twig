@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Job Offers{% endblock %}
+
+{% block body %}
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class='jumbotron jumbotron-fluid text-center'>
+                <h1 class='display-2'>Job Offers</h1>
+            </div>
+        </div>
+    
+        <h3 class="col-12 text-center">Vous avez crée
+	        {{jobsList|length}} offre{% if jobsList|length < 2 %}s{% endif %} d'emploi</h3>
+        {% for job in jobsList %}
+            <div class="col-3 mb-3">
+                <div class="card jobbo-card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <a href=''>
+                                <h4 class="text-center">{{job.title}}</h4>
+                            </a>
+                        </div>
+                        <hr>
+
+                        <div class="text-center">
+                            <h5 class="mb-3">
+                                <small class="text-muted">par Auteur TODO</small>
+                            </h5>
+
+
+                            <a href="" class="btn btn-info btn-sm m-2">
+                                <small>candidatures</small>
+                                <span class='badge badge-light'>Nb</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="action-btn text-center mx-auto">
+                            Postuler
+                        </div>
+                        <hr>
+
+                        <div class="text-center">
+
+                            <small class="text-muted">annonce créée le {{job.createdAt|date('d/m/y')}}</small>
+
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        {% endfor %}
+    </div>
+
+
+
+{% endblock %}

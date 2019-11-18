@@ -19,3 +19,5 @@ class JobOfferController extends AbstractController
         return $this->render('job_offers/list.html.twig');
     }
 }
+
+

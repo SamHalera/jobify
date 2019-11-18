@@ -8,44 +8,60 @@
     </div>
     
     <div class="row">
-<div class="col-md-3 col-12">
-	<div class="card-deck">
-		<div class="card jobbo-card">
-		
-			<div class="card-body">
-				<div class="card-title">
-					<a href=''>
-						<h4 class="text-center">Titre</h4>
-					</a>
-					
-				</div>
-				<hr>
+		<div class="col-md-3 col-12">
+			<div class="card-deck">
+				<div class="card jobbo-card">
+				
+					<div class="card-body">
+						<div class="card-title">
+							<a href=''>
+								<h4 class="text-center">Titre</h4>
+							</a>
+							
+						</div>
+						<hr>
 
-				<div class="text-center">
-					<h5 class="mb-3">Pôle
-						<strong>IT</strong>
-					</h5>
+						<div class="text-center">
+							<h5 class="mb-3">Pôle
+								<strong>IT</strong>
+							</h5>
 
-					
-					<a href="" class="btn btn-info btn-sm m-2">
-						<small>candidatures</small>
-						<span class='badge badge-light'>Nb</span>
-					</a>
+							
+							<a href="" class="btn btn-info btn-sm m-2">
+								<small>candidatures</small>
+								<span class='badge badge-light'>Nb</span>
+							</a>
+						</div>
+					</div>
+					<div class="card-footer">
+						<div class="action-btn text-center mx-auto">
+						Postuler
+						</div>
+						<hr>
+
+						<div class="text-center">
+							
+							<a href="" class="js-favorite-jobOffer">
+								<span class="js-favorite"></span>
+								<i class="js-icon far fa-star"></i>
+							</a>
+
+						</div>
+					</div>
+
+
 				</div>
 			</div>
-			<div class="card-footer">
-				<div class="action-btn text-center mx-auto">
-				Postuler
-				</div>
-			</div>
-
-
 		</div>
-	</div>
-</div>
 
     </div>
 
 </div>
+
+{% endblock %}
+
+{% block javascripts %}
+	{{parent()}}
+<script src="{{ asset('js/jobOffer.js')}}"></script>
 
 {% endblock %}
