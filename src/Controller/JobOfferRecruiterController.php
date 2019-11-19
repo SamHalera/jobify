@@ -57,4 +57,23 @@ class JobOfferRecruiterController extends AbstractController{
         ]);
     }
 
+    /**
+     * @Route("recruiter/job/{id}", name="app_recruiter_job_show")
+     */
+    public function show(EntityManagerInterface $em, $id){
+
+        $repository = $em->getRepository(JobOffer::class);
+
+        /**@var JobOffer $jobOffer */
+        $jobOffer = $repository->findOneBy(['id' => $id]);
+
+        if(!$jobOffer){
+            throw $this->createNotFoundException(\sprintf('Aucune offre d\'emploi avec l\'id %s', $id)); 
+        }
+
+        return $this->render('recruiter/job_view.html.twig', [
+            'jobOffer' => $jobOffer
+        ]);
+    }
+
 }

@@ -19,7 +19,8 @@
                 <div class="card jobbo-card">
                     <div class="card-body">
                         <div class="card-title">
-                            <a href=''>
+                            <a href='{{path('app_recruiter_job_show', {'id' : job.id})}}'>
+
                                 <h4 class="text-center">{{job.title}}</h4>
                             </a>
                         </div>
@@ -46,6 +47,11 @@
                         <div class="text-center">
 
                             <small class="text-muted">annonce créée le {{job.createdAt|date('d/m/y')}}</small>
+                            <br>
+                            {% if job.publishedAt is not null %}
+                                <small class="text-muted font-italic">offre publiée {{job.publishedAt|date('d/m/y')}}</small>
+                                <br>
+                            {% endif %}
 
                         </div>
                     </div>

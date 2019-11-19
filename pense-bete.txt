@@ -22,6 +22,8 @@ composer require symfony/maker-bundle --dev
 
 composer require swiftmailer-bundle
 
+composer require knplabs/knp-time-bundle
+
 
 --> FOSUser Bundle
 

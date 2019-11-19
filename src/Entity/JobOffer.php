@@ -46,10 +46,7 @@ class JobOffer
      */
     private $contentRequirements;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isPublished;
+    
 
     /**
      * @ORM\Column(type="boolean")
@@ -69,7 +66,7 @@ class JobOffer
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->isPublished = false;
+        //$this->isPublished = false;
         $this->isOpened = false;
         
     }
@@ -150,17 +147,7 @@ class JobOffer
         return $this;
     }
 
-    public function getIsPublished(): ?bool
-    {
-        return $this->isPublished;
-    }
-
-    public function setIsPublished(bool $isPublished): self
-    {
-        $this->isPublished = $isPublished;
-
-        return $this;
-    }
+   
 
     public function getIsOpened(): ?bool
     {
