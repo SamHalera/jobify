@@ -37,11 +37,21 @@
 
                         <a href="" class="btn btn-info btn-sm"><i class="el-icon-edit"></i> modifier</a>
 
-                        {% if jobOffer.publishedAt is null %}
-                            <a href="" class="btn btn-success btn-sm m-2"><i class="el-icon-s-promotion"></i> publier</a>
+                        {% if jobOffer.isPublished == false %}
+                            <a href="{{path('app_admin_job_offer_published', {'id' : jobOffer.id})}}" class="btn btn-success btn-sm m-2">
+                                <i class="el-icon-s-promotion"></i> publier
+                            </a>
+                            <a href="{{path('app_recruiter_job_isFilled', {'id' : jobOffer.id})}}" class="btn btn-secondary btn-sm m-2">
+                                <i class="el-icon-circle-close"></i> poste pourvu
+                            </a>
                         {% else %}
-                            <a href="" class="btn btn-warning btn-sm m-2"><i class="el-icon-document"></i> brouillon</a>
+                            <a href="{{path('app_admin_job_offer_published', {'id' : jobOffer.id})}}" class="btn btn-warning btn-sm m-2">
+                                <i class="el-icon-document-remove"></i> retirer
+                            </a>
+                            
                         {% endif %}
+
+
                         <a href="" class="btn btn-outline-danger btn-sm m-2"><i class="el-icon-delete"></i></a>
 
                         <div class="mt-3">

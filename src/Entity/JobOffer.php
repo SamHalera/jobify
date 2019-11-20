@@ -51,7 +51,12 @@ class JobOffer
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isOpened;
+    private $isFilled;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPublished;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -63,12 +68,11 @@ class JobOffer
      */
     private $slug;
 
+    
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        //$this->isPublished = false;
-        $this->isOpened = false;
-        
     }
     public function getId(): ?int
     {
@@ -149,14 +153,14 @@ class JobOffer
 
    
 
-    public function getIsOpened(): ?bool
+    public function getIsFilled(): ?bool
     {
-        return $this->isOpened;
+        return $this->isFilled;
     }
 
-    public function setIsOpened(bool $isOpened): self
+    public function setIsFilled(bool $isFilled): self
     {
-        $this->isOpened = $isOpened;
+        $this->isFilled = $isFilled;
 
         return $this;
     }
@@ -181,6 +185,18 @@ class JobOffer
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(?bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
 
         return $this;
     }

@@ -19,12 +19,19 @@ class JobOfferController extends AbstractController
     {
         $repository = $em->getRepository(JobOffer::class);
 
-        $jobList = $repository->findBy([
-            'isOpened' => true
-        ]);
-        return $this->render('job_offers/list.html.twig', [
-            'jobList' => $jobList
-        ]);
+        $jobList = $repository->findBy(
+            [
+                'isFilled' => true
+            ],
+            [
+                'publishedAt' => 'DESC'
+            ]
+        );
+        return $this->render('job_offers/list.html.twig', 
+            [
+                'jobList' => $jobList
+            ]
+        );
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\JobOffer;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,13 +31,6 @@ class JobOfferRecruiterController extends AbstractController{
             ->setContentRequirements($contentRequirements)
             ->setSlug("webdeisgner-".rand(100,999));
         
-        //publish some job offers randomly
-        
-        if(rand(1,10) > 2){
-            $jobOffer->setPublishedAt(new \DateTime(sprintf('-%d days', rand(1, 100))));
-            $jobOffer->setIsOpened(true);
-        }
-
         $em->persist($jobOffer);
         $em->flush();
 
@@ -51,7 +45,7 @@ class JobOfferRecruiterController extends AbstractController{
         $repository = $em->getRepository(JobOffer::class);
 
         
-        $jobsList = $repository->findAll();
+        $jobsList = $repository->findBy([],['createdAt' => 'DESC']);
 
         return $this->render("recruiter/jobs_list.html.twig",[
             'jobsList' => $jobsList
@@ -76,5 +70,57 @@ class JobOfferRecruiterController extends AbstractController{
             'jobOffer' => $jobOffer
         ]);
     }
+
+    /**
+     * @Route("recruiter/job/{id}/isFilled", name="app_recruiter_job_isFilled")
+     */
+    public function isFilled(EntityManagerInterface $em, $id){
+
+        $repository = $em->getRepository(JobOffer::class);
+        $jobOffer = $repository->find($id);
+
+        if($jobOffer->getIsFilled == true){
+            $jobOffer->setIsFilled(false);
+            
+        } else{
+            $jobOffer->setIsFilled(true);
+        }
+        $em->persist($jobOffer);
+        $em->flush();
+
+        return $this->redirectToRoute('app_recruiter_job_show', ['id' => $id]);
+
+    }
+
+    /**
+     * 
+     * @Route("/{id}/IsPublished", name="app_admin_job_offer_published")
+     */
+    public function isPublished($id, Request $request, EntityManagerInterface $em){
+        
+        $repository = $em->getRepository(JobOffer::class);
+        $jobOffer = $repository->find($id);
+
+        if($jobOffer->getIsPublished() == true){
+            $jobOffer->setIsPublished(false);
+            $jobOffer->setIsFilled(false);
+            $jobOffer->setPublishedAt(NULL);
+            $request->getSession()->getFlashBag()->add('success', 'L\'annonce a bien été retirée');
+        } else {
+            $jobOffer->setIsPublished(true);
+            $jobOffer->setIsFilled(true);
+            $jobOffer->setPublishedAt(new \DateTime());
+            $request->getSession()->getFlashBag()->add('success', 'L\'annonce a bien été pubbliée');
+        }
+        
+        $em->persist($jobOffer);
+        $em->flush();
+        
+        
+        
+        return $this->redirectToRoute('app_recruiter_job_show', ['id' => $id]);
+        
+    }
+    
 
 }

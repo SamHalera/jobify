@@ -8,7 +8,8 @@
     <div class="row">
         <div class="col-12">
             <div class='jumbotron jumbotron-fluid text-center'>
-                <h1 class='display-2'>Job Offers</h1>
+                <h2 class='display-2'>Espace Recruteur</h2>
+                <h3 class='display-3'>Vos offres d'emploi</h3>
             </div>
         </div>
     
@@ -39,17 +40,12 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <div class="action-btn text-center mx-auto">
-                            Postuler
-                        </div>
-                        <hr>
-
                         <div class="text-center">
 
                             <small class="text-muted">annonce créée le {{job.createdAt|date('d/m/y')}}</small>
                             <br>
                             {% if job.publishedAt is not null %}
-                                <small class="text-muted font-italic">offre publiée {{job.publishedAt|date('d/m/y')}}</small>
+                                <small class="text-muted font-italic">offre en ligne depuis le {{job.publishedAt|date('d/m/y')}}</small>
                                 <br>
                             {% endif %}
 

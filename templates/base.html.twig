@@ -35,7 +35,7 @@
 
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item">
-							<a class='nav-link' href="">Accueil</a>
+							<a class='nav-link' href="{{ path('app_home') }}">Accueil</a>
 						</li>
 						<li class="nav-item">
 							<a class='nav-link' href="{{path("app_jobs_list")}}">Annonces</a>
@@ -129,8 +129,18 @@
 
 		{% endblock %}
 
-		<div class='container-fluid'> {% block body %}{% endblock %}
+		<div class='container-fluid'> 
+			{% block body %}{% endblock %}
+			
+			<div class='sticky-container'>
+
+				<a href='{{ path('app_recruiter_joboffer_new')}}' id='btn-circle' class='btn sticky'>
+					<i class='el-icon-plus'></i>+
+				</a><br>
+				<small>nouvelle offre</small>
+				</a>
 			</div>
+		</div>
 
 			<hr>
 
