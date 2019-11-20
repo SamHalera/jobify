@@ -34,12 +34,13 @@ class JobOfferRecruiterController extends AbstractController{
         
         if(rand(1,10) > 2){
             $jobOffer->setPublishedAt(new \DateTime(sprintf('-%d days', rand(1, 100))));
+            $jobOffer->setIsOpened(true);
         }
 
         $em->persist($jobOffer);
         $em->flush();
 
-        return $this->redirectToRoute('app_recruiter_joboffers_list');
+        return $this->redirectToRoute('app_recruiter_jobs_list');
     }
 
     /**

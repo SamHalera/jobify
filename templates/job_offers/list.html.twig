@@ -8,14 +8,16 @@
     </div>
     
     <div class="row">
-		<div class="col-md-3 col-12">
+
+	{% for job in jobList %}
+		<div class="col-md-3 col-12 mb-5">
 			<div class="card-deck">
 				<div class="card jobbo-card">
 				
 					<div class="card-body">
 						<div class="card-title">
-							<a href=''>
-								<h4 class="text-center">Titre</h4>
+							<a href='{{path('app_job_view', {slug : job.slug })}}'>
+								<h4 class="text-center">{{job.title}}</h4>
 							</a>
 							
 						</div>
@@ -23,7 +25,7 @@
 
 						<div class="text-center">
 							<h5 class="mb-3">Pôle
-								<strong>IT</strong>
+								<strong>TODO</strong>
 							</h5>
 
 							
@@ -54,7 +56,8 @@
 			</div>
 		</div>
 
-    </div>
+	{% endfor %}
+	</div>	
 
 </div>
 
