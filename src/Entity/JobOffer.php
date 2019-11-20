@@ -73,6 +73,8 @@ class JobOffer
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->isFilled = false;
+        $this->isPublished = false;
     }
     public function getId(): ?int
     {
