@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -88,6 +90,11 @@ class JobOffer
      */
     private $imageFilename;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="jobOffer")
+     */
+    private $applications;
+
     
 
     public function __construct()
@@ -95,6 +102,7 @@ class JobOffer
         $this->createdAt = new \DateTime();
         $this->isFilled = false;
         $this->isPublished = false;
+        $this->applications = new ArrayCollection();
     }
     public function getId(): ?int
     {
@@ -263,5 +271,36 @@ class JobOffer
     public function getImagePath()
     {
         return 'images/'. $this->getImageFilename();
+    }
+
+    /**
+     * @return Collection|Application[]
+     */
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application): self
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications[] = $application;
+            $application->setJobOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): self
+    {
+        if ($this->applications->contains($application)) {
+            $this->applications->removeElement($application);
+            // set the owning side to null (unless already changed)
+            if ($application->getJobOffer() === $this) {
+                $application->setJobOffer(null);
+            }
+        }
+
+        return $this;
     }
 }
