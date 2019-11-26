@@ -36,7 +36,7 @@ class JobOfferController extends AbstractController
     }
 
     /**
-     * @Route("/job/{slug}", name="app_job_view")
+     * @Route("/jobs/{slug}", name="app_job_view")
      */
     public function JobOfferView(EntityManagerInterface $em, $slug)
     {

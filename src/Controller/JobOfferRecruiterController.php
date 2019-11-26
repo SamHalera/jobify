@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class JobOfferRecruiterController extends AbstractController{
 
     /**
-     * @Route("recruiter/joboffer/new", name="app_recruiter_joboffer_new")
+     * @Route("recruiter/jobs/new", name="app_recruiter_joboffer_new")
      */
     public function new(EntityManagerInterface $em){
 
@@ -69,7 +69,7 @@ class JobOfferRecruiterController extends AbstractController{
     }
 
     /**
-     * @Route("recruiter/job/{id}", name="app_recruiter_job_show")
+     * @Route("recruiter/jobs/{id}", name="app_recruiter_job_show")
      */
     public function show(EntityManagerInterface $em, $id){
 
@@ -90,7 +90,7 @@ class JobOfferRecruiterController extends AbstractController{
     }
 
     /**
-     * @Route("recruiter/job/{id}/isFilled", name="app_recruiter_job_isFilled")
+     * @Route("recruiter/jobs/{id}/isFilled", name="app_recruiter_job_isFilled")
      */
     public function isFilled(EntityManagerInterface $em, $id){
 
@@ -112,7 +112,7 @@ class JobOfferRecruiterController extends AbstractController{
 
     /**
      * 
-     * @Route("/{id}/IsPublished", name="app_admin_job_offer_published")
+     * @Route("recruiter/jobs/{id}/IsPublished", name="app_admin_job_offer_published")
      */
     public function isPublished($id, Request $request, EntityManagerInterface $em){
         
