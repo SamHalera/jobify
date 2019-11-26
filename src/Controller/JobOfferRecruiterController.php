@@ -3,7 +3,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Application;
 use App\Entity\JobOffer;
+use App\Repository\ApplicationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +34,20 @@ class JobOfferRecruiterController extends AbstractController{
             ->setAuthor('John Smith')
             ->setImageFilename('dev1.jpg');
         
+        $application1 = new Application();
+        $application2 = new Application();
+        $application1
+            ->setApplicantName('Johnatan Blaise')
+            ->setMotivationalMessage('Bonjour, je suis intéressé par votre offre! Merci de me contacter!')
+            ->setJobOffer($jobOffer);
+        $application2
+            ->setApplicantName('Patrice Low')
+            ->setMotivationalMessage('Bonjour, je suis intéressé par votre offre! Je suis très motivé hein!')
+            ->setJobOffer($jobOffer);
+        
         $em->persist($jobOffer);
+        $em->persist($application1);
+        $em->persist($application2);
         $em->flush();
 
         return $this->redirectToRoute('app_recruiter_jobs_list');
@@ -66,6 +81,8 @@ class JobOfferRecruiterController extends AbstractController{
         if(!$jobOffer){
             throw $this->createNotFoundException(\sprintf('Aucune offre d\'emploi avec l\'id %s', $id)); 
         }
+
+       
 
         return $this->render('recruiter/job_view.html.twig', [
             'jobOffer' => $jobOffer

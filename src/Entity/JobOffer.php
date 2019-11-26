@@ -101,7 +101,7 @@ class JobOffer
     {
         $this->createdAt = new \DateTime();
         $this->isFilled = false;
-        $this->isPublished = false;
+        $this->isPublished = true;
         $this->applications = new ArrayCollection();
     }
     public function getId(): ?int

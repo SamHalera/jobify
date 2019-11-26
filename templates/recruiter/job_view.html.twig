@@ -93,12 +93,15 @@
         <div class='col-md-3 border-left'>
 
            
-                <h3 class='mb-3'>Candidatures</h3>
+                <h3 class='mb-3'>{{jobOffer.applications|length}} Candidatures</h3>
 
-                <div class='mb-4'>
-                    <a class="" href=""><span class="">Antonio Alteri (TODO)</span></a>
-                    <span class="text-muted font-italic">(12-12-2019)</span>
-                </div>
+                {% for application in jobOffer.applications %}
+                    <div class='mb-4'>
+                        <a class="" href=""><span class="">{{application.applicantName}}</span></a>
+                        <span class="text-muted font-italic">({{application.createdAt|date('d-m-Y')}})</span>
+                    </div>
+                {% endfor %}
+                
             
         </div>
 
