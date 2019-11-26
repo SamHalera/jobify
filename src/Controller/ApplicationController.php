@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Application;
+use App\Repository\JobOfferRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ApplicationController extends AbstractController
@@ -12,21 +14,22 @@ class ApplicationController extends AbstractController
     /**
      * @Route("/applications/job/{id}", name="app_applications_list")
      */
-    public function index(EntityManagerInterface $em, $id)
+    public function index(EntityManagerInterface $em, JobOfferRepository $jobOfferRepository, $id)
     {
 
-        $repository = $em->getRepository(Application::class);
+        //$repository = $em->getRepository(Application::class);
+        $jobOffer = $jobOfferRepository->find($id);
 
-        $applications = $repository->findBy(
+        /*$applications = $repository->findBy(
             [
                 'jobOffer'=> $id
             ]);
 
-        
+        */
 
         return $this->render('application/index.html.twig', [
-            'applications' => $applications,
-            
+            //'applications' => $applications,
+            'jobOffer' => $jobOffer
         ]);
     }
     
@@ -38,5 +41,30 @@ class ApplicationController extends AbstractController
         return $this->render('application/view.html.twig', [
             'controller_name' => 'ApplicationController',
         ]);
+    }
+
+
+    /**
+     * @Route("/applications/{id}/isDeleted", name="app_application_isDeleted")
+     *
+     * @param [type] $id
+     * @return boolean
+     */
+    public function isDeleted(EntityManagerInterface $em, Request $request, $id)
+    {
+        $repository = $em->getRepository(Application::class);
+        /**
+         * @var Application $application
+         */
+        $application = $repository->find($id);
+
+        $application->setIsDeleted(true);
+
+        $em->persist($application);
+        $em->flush($application);
+
+        $request->getSession()->getFlashBag()->add('success', 'La canddiature a bien été supprimée');
+        return $this->redirectToRoute('app_applications_list', ['id' => $application->getJobOffer()->getId()]);
+
     }
 }

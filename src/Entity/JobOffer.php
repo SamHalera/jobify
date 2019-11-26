@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -280,6 +281,18 @@ class JobOffer
     public function getApplications(): Collection
     {
         return $this->applications;
+    }
+
+    /**
+     * @return Collection|Application[]
+     */
+    public function getNonDeletedApplications(): Collection
+    {
+        $criteria = Criteria::create()
+            ->andWhere(Criteria::expr()->eq('isDeleted', false))
+            ->orderBy(['createdAt' => 'DESC']);
+
+        return $this->applications->matching($criteria);
     }
 
     public function addApplication(Application $application): self

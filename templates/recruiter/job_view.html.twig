@@ -92,9 +92,9 @@
 
         <div class='col-md-3 border-left'>
 
-           
+            <a href="{{path('app_applications_list', {'id' : jobOffer.id})}}">
                 <h3 class='mb-3'>{{jobOffer.applications|length}} Candidatures</h3>
-
+            </a>
                 {% for application in jobOffer.applications %}
                     <div class='mb-4'>
                         <a class="" href=""><span class="">{{application.applicantName}}</span></a>
