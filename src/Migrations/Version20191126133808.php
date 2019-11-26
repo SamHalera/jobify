@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191120215253 extends AbstractMigration
+final class Version20191126133808 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,7 @@ final class Version20191120215253 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE job_offer CHANGE is_opened is_filled TINYINT(1) NOT NULL');
+        $this->addSql('ALTER TABLE job_offer ADD author VARCHAR(255) NOT NULL, ADD applications_count INT NOT NULL, ADD image_filename VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +30,6 @@ final class Version20191120215253 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE job_offer CHANGE is_filled is_opened TINYINT(1) NOT NULL');
+        $this->addSql('ALTER TABLE job_offer DROP author, DROP applications_count, DROP image_filename');
     }
 }

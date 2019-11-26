@@ -18,6 +18,9 @@
         {% for job in jobsList %}
             <div class="col-3 mb-3">
                 <div class="card jobbo-card">
+                    <div class="">
+						<img class="img-fluid" src="{{asset(job.getImagePath)}}" width="300">
+					</div>
                     <div class="card-body">
                         <div class="card-title">
                             <a href='{{path('app_recruiter_job_show', {'id' : job.id})}}'>
@@ -29,7 +32,7 @@
 
                         <div class="text-center">
                             <h5 class="mb-3">
-                                <small class="text-muted">par Auteur TODO</small>
+                                <small class="text-muted">créé par {{job.author}}</small>
                             </h5>
 
 

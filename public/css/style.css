@@ -43,3 +43,17 @@ li{
 .jobbo-card{
     background-color: #dfdfdf;
 }
+
+.bg-img{
+    background: url("../images/dev1.jpg") no-repeat;
+    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    background-size: cover !important;
+    background-position: 50% 50% !important;
+    background-attachment: scroll;
+}
+
+.overlay{
+    background: rgba(8, 23, 64, 0.77);
+}
