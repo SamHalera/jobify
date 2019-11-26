@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\JobOfferRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
@@ -288,10 +289,7 @@ class JobOffer
      */
     public function getNonDeletedApplications(): Collection
     {
-        $criteria = Criteria::create()
-            ->andWhere(Criteria::expr()->eq('isDeleted', false))
-            ->orderBy(['createdAt' => 'DESC']);
-
+        $criteria = JobOfferRepository::createNonDeletedCriteria();
         return $this->applications->matching($criteria);
     }
 

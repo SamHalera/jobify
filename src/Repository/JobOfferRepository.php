@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\JobOffer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
@@ -19,6 +20,12 @@ class JobOfferRepository extends ServiceEntityRepository
         parent::__construct($registry, JobOffer::class);
     }
 
+    public static function createNonDeletedCriteria() : Criteria
+    {
+        return Criteria::create()
+            ->andWhere(Criteria::expr()->eq('isDeleted', false))
+            ->orderBy(['createdAt' => 'DESC']);
+    }
     // /**
     //  * @return JobOffer[] Returns an array of JobOffer objects
     //  */

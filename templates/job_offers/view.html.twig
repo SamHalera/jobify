@@ -75,7 +75,7 @@
 
            
             <h5 class='mb-3'>
-                {{job.applications|length}} candidature{% if job.applications|length > 1 %}s
+                {{job.getNonDeletedApplications|length}} candidature{% if job.getNonDeletedApplications|length > 1 %}s
                 {% endif %} pour cette offre
             </h5>
             
