@@ -1,0 +1,75 @@
+{% extends "base.html.twig"%}
+
+{% block title %} Applications {% endblock %}
+
+
+{% block body %}
+
+<div class='row justify-content-center'>
+    <div id="content" class="col-12">
+
+        <div class='jumbotron jumbotron-fluid text-center bg-img text-white'>
+            <div class="overlay">
+                <h1 class='display-3 mb-3'>{{jobOffer.title}}</h1>
+
+            
+                <div class="infos text-center mx-auto">
+                    <div class="mb-3">
+                        <h4>Pôle <strong>TODO</strong></h4>
+                        <ul>
+                            
+                            <li class="text-muted">TODO</li>
+                                
+                        </ul>
+                        <small class="text-muted font-italic">date de création {{jobOffer.createdAt|date('d/m/y')}}</small>
+                        <br>
+                        {% if jobOffer.updatedAt is not null %}
+                            <small class="text-muted font-italic">date de modification : {{jobOffer.updatedAt|date('d/m/Y')}}</small>
+                            <br>
+                            
+                        {% endif %}
+                        {% if jobOffer.publishedAt is not null %}
+                            <small class="text-muted font-italic">offre publiée {{jobOffer.publishedAt|date('d/m/y')}}</small>
+                            <br>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-8 mx-auto">
+
+        <h3 class="text-center mb-5 mt-3">{{jobOffer.getNonDeletedApplications|length}} Candidature{% if jobOffer.getNonDeletedApplications|length > 1 %}s{% endif %}</h3>
+        <table class="table table-stripped text-center">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Applicant name</th>
+                    <th>Application date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for application in jobOffer.getNonDeletedApplications %}
+                <tr>
+                    <td>{{application.id}}</td>
+                    <td>{{application.applicantName}}</td>
+                    <td>{{application.createdAt|date('d-m-Y')}}</td>
+                    <td>
+                        <a href="" class="btn btn-info"><i class="el-icon-view"></i> voir</a>
+                        <a href="" class="btn btn-warning"><i class="el-icon-circle-close"></i> rejeter</a>
+                        <a href="{{path('app_application_isDeleted', {'id' : application.id})}}" class="btn  btn-outline-danger"><i class="el-icon-delete"></i> supprimer</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+
+    </div>
+
+</div>
+
+{% endblock %}

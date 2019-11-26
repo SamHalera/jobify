@@ -9,10 +9,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ApplicationController extends AbstractController
+
+class ApplicationRecruiterController extends AbstractController
 {
     /**
-     * @Route("/applications/job/{id}", name="app_applications_list")
+     * @Route("/recruiter/applications/job/{id}", name="app_applications_list")
      */
     public function index(EntityManagerInterface $em, JobOfferRepository $jobOfferRepository, $id)
     {
@@ -27,25 +28,25 @@ class ApplicationController extends AbstractController
 
         */
 
-        return $this->render('application/index.html.twig', [
+        return $this->render('recruiter/applications_list.html.twig', [
             //'applications' => $applications,
             'jobOffer' => $jobOffer
         ]);
     }
     
     /**
-     * @Route("/applications/{id}/view", name="app_application_view")
+     * @Route("/recruiter/applications/{id}/view", name="app_application_view")
      */
     public function view(EntityManagerInterface $em, $id)
     {
-        return $this->render('application/view.html.twig', [
-            'controller_name' => 'ApplicationController',
+        return $this->render('recruiter/application_view.html.twig', [
+            //'controller_name' => 'ApplicationController',
         ]);
     }
 
 
     /**
-     * @Route("/applications/{id}/isDeleted", name="app_application_isDeleted")
+     * @Route("/recruiter/applications/{id}/isDeleted", name="app_application_isDeleted")
      *
      * @param [type] $id
      * @return boolean
