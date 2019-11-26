@@ -29,7 +29,6 @@ class JobOfferRecruiterController extends AbstractController{
             ->setTitle($title."-".rand(100,990))
             ->setContentMission($contentMisison)
             ->setContentRequirements($contentRequirements)
-            ->setSlug("webdeisgner-".rand(100,999))
             ->setAuthor('John Smith')
             ->setImageFilename('dev1.jpg');
         

@@ -24,6 +24,8 @@ composer require swiftmailer-bundle
 
 composer require knplabs/knp-time-bundle
 
+composer require stof/doctrine-extensions-bundle
+
 
 --> FOSUser Bundle
 
