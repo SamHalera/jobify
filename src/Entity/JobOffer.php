@@ -91,7 +91,8 @@ class JobOffer
     private $imageFilename;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="jobOffer")
+     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="jobOffer", fetch="EXTRA_LAZY")
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $applications;
 

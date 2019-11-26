@@ -21,7 +21,7 @@ class JobOfferController extends AbstractController
 
         $jobList = $repository->findBy(
             [
-                'isFilled' => false,
+                //'isFilled' => false,
                 'isPublished' => true
             ],
             [
