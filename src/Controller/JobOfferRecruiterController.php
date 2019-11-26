@@ -104,12 +104,12 @@ class JobOfferRecruiterController extends AbstractController{
 
         if($jobOffer->getIsPublished() == true){
             $jobOffer->setIsPublished(false);
-            $jobOffer->setIsFilled(false);
+            //$jobOffer->setIsFilled(false);
             $jobOffer->setPublishedAt(NULL);
             $request->getSession()->getFlashBag()->add('success', 'L\'annonce a bien été retirée');
         } else {
             $jobOffer->setIsPublished(true);
-            $jobOffer->setIsFilled(true);
+            //$jobOffer->setIsFilled(true);
             $jobOffer->setPublishedAt(new \DateTime());
             $request->getSession()->getFlashBag()->add('success', 'L\'annonce a bien été pubbliée');
         }
