@@ -12,9 +12,27 @@
                 <h3 class='display-3'>Vos offres d'emploi</h3>
             </div>
         </div>
-    
-        <h3 class="col-12 text-center">Vous avez crée
-	        {{jobsList|length}} offre{% if jobsList|length < 2 %}s{% endif %} d'emploi</h3>
+
+        <div class="col-6 mx-auto mb-4">
+            <form class=" text-center">
+                <div class="input-group mb-3">
+                    <input type="text"
+                           name="q"
+                           class="form-control"
+                           placeholder="Recherche..."
+                           value="{{app.request.query.get('q')}}"
+                    >
+                    <div class="input-group-append">
+                        <button type="submit"
+                                class="btn btn-outline-secondary">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <h3 class="col-12 text-center">
+	        {{jobsList|length}} offre{% if jobsList|length > 2 %}s{% endif %} d'emploi</h3>
         {% for job in jobsList %}
             <div class="col-3 mb-3">
                 <div class="card jobbo-card">
@@ -57,7 +75,8 @@
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div> 
+ 
         {% endfor %}
     </div>
 

@@ -56,12 +56,15 @@ class JobOfferRecruiterController extends AbstractController{
     /**
      * @Route("recruiter/jobs/list", name = "app_recruiter_jobs_list")
      */
-    public function list(EntityManagerInterface $em){
+    public function list(EntityManagerInterface $em, Request $request){
+
+
+        $q = $request->query->get('q');
 
         $repository = $em->getRepository(JobOffer::class);
 
         
-        $jobsList = $repository->findBy([],['createdAt' => 'DESC']);
+        $jobsList = $repository->findAllWithSearch($q);
 
         return $this->render("recruiter/jobs_list.html.twig",[
             'jobsList' => $jobsList

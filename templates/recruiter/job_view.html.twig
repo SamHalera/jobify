@@ -10,26 +10,34 @@
         <div id="content" class="col-12">
             <div class='jumbotron jumbotron-fluid text-center bg-img text-white'>
                 <div class="overlay">
-                    <h1 class='display-3 mb-3'>{{jobOffer.title}}</h1>
+                    <h1 class='display-3'>{{jobOffer.title}}</h1> 
 
-                
+                    <div class="mb-5">
+                    {% if jobOffer.isPublished == true %}
+                        <span class="badge badge-pill badge-info">en ligne</span>
+
+                    {% else %}
+                        <span class="badge badge-pill badge-warning">brouillon</span>
+                    {% endif %}
+                    </div>
+                    
                     <div class="infos text-center mx-auto">
                         <div class="mb-3">
                             <h4>Pôle <strong>TODO</strong></h4>
                             <ul>
                                 
-                                <li class="text-muted">TODO</li>
+                                <li class="">TODO</li>
                                     
                             </ul>
-                            <small class="text-muted font-italic">date de création {{jobOffer.createdAt|date('d/m/y')}}</small>
+                            <small class=" font-italic">date de création {{jobOffer.createdAt|date('d/m/y')}}</small>
                             <br>
                             {% if jobOffer.updatedAt is not null %}
-                                <small class="text-muted font-italic">date de modification : {{jobOffer.updatedAt|date('d/m/Y')}}</small>
+                                <small class=" font-italic">date de modification : {{jobOffer.updatedAt|date('d/m/Y')}}</small>
                                 <br>
                                 
                             {% endif %}
                             {% if jobOffer.publishedAt is not null %}
-                                <small class="text-muted font-italic">offre publiée {{jobOffer.publishedAt|date('d/m/y')}}</small>
+                                <small class=" font-italic">offre publiée {{jobOffer.publishedAt|date('d/m/y')}}</small>
                                 <br>
                             {% endif %}
 
@@ -97,7 +105,7 @@
             </a>
                 {% for application in jobOffer.applications %}
                     <div class='mb-4'>
-                        <a class="" href=""><span class="">{{application.applicantName}}</span></a>
+                        <a class="" href="{{path('app_application_view', {'id' : application.id})}}"><span class="">{{application.applicantName}}</span></a>
                         <span class="text-muted font-italic">({{application.createdAt|date('d-m-Y')}})</span>
                     </div>
                 {% endfor %}

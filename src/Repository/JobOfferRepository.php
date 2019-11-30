@@ -26,6 +26,28 @@ class JobOfferRepository extends ServiceEntityRepository
             ->andWhere(Criteria::expr()->eq('isDeleted', false))
             ->orderBy(['createdAt' => 'DESC']);
     }
+
+    /**
+     * 
+     *
+     * @param string|null $term
+     * @return JobOffer[]
+     */
+    public function findAllWithSearch(?string $term)
+    {
+        $qb = $this->createQueryBuilder('j');
+
+        if($term){
+            $qb->andWhere('j.title LIKE :term OR j.author LIKE :term')
+                ->setParameter('term', '%'.$term. '%')
+                ;
+        }
+
+        return $qb
+            ->orderBy('j.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return JobOffer[] Returns an array of JobOffer objects
     //  */

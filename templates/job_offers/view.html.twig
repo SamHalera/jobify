@@ -18,17 +18,17 @@
                             <h4>Pôle <strong>TODO</strong></h4>
                             <ul>
                                 
-                                <li class="text-muted">TODO</li>
+                                <li class="">TODO</li>
                                     
                             </ul>
                             
                             {% if job.updatedAt is not null %}
-                                <small class="text-muted font-italic">mise à jour le {{job.updatedAt|date('d/m/Y')}}</small>
+                                <small class="font-italic">mise à jour le {{job.updatedAt|date('d/m/Y')}}</small>
                                 <br>
                                 
                             {% endif %}
                             
-                            <small class="text-muted font-italic">offre publiée {{job.publishedAt|date('d/m/y')}}</small>
+                            <small class="font-italic">offre publiée {{job.publishedAt|date('d/m/y')}}</small>
                             <br>
                             
 
@@ -69,6 +69,10 @@
                     {{job.contentRequirements}}
                 </div>
             </section>
+
+            <div class="text-center">
+                <a href="" class="btn btn-info btn-rounded">postuler</a>
+            </div>
         </div>
 
         <div class='col-md-3 border-left'>

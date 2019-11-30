@@ -39,8 +39,12 @@ class ApplicationRecruiterController extends AbstractController
      */
     public function view(EntityManagerInterface $em, $id)
     {
+
+        $repository = $em->getRepository(Application::class);
+        $application = $repository->find($id);
+
         return $this->render('recruiter/application_view.html.twig', [
-            //'controller_name' => 'ApplicationController',
+            'application' => $application
         ]);
     }
 
