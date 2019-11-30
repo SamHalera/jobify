@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
@@ -28,12 +29,15 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $router;
 
     private $csrfTokenManagerInterface;
+
+    private $passwordEncoder;
     
-    public function __construct(UserRepository $userRepository, RouterInterface $router, CsrfTokenManagerInterface $csrfTokenManagerInterface)
+    public function __construct(UserRepository $userRepository, RouterInterface $router, CsrfTokenManagerInterface $csrfTokenManagerInterface, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->userRepository = $userRepository;
         $this->router = $router;
         $this->csrfTokenManagerInterface = $csrfTokenManagerInterface;
+        $this->passwordEncoder = $passwordEncoder;
     }
     public function supports(Request $request)
     {
@@ -70,9 +74,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        //TODO PASSWORD CHECK
+        
 
-        return true;
+        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
 
@@ -144,6 +148,26 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function setCsrfTokenManagerInterface($csrfTokenManagerInterface)
     {
         $this->csrfTokenManagerInterface = $csrfTokenManagerInterface;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of passwordEncoder
+     */ 
+    public function getPasswordEncoder()
+    {
+        return $this->passwordEncoder;
+    }
+
+    /**
+     * Set the value of passwordEncoder
+     *
+     * @return  self
+     */ 
+    public function setPasswordEncoder($passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
 
         return $this;
     }
