@@ -14,6 +14,8 @@ composer require sec-checker
 
 composer require symfony/security
 
+composer require security
+
 composer require profiler --dev
 
 composer require debug --dev
