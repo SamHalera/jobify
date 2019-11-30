@@ -18,10 +18,17 @@
 					</div>
 				
 					<div class="card-body">
-						<div class="card-title">
+						<div class="card-title text-center">
 							<a href='{{path('app_job_view', {slug : job.slug })}}'>
 								<h4 class="text-center">{{job.title}}</h4>
 							</a>
+							<!-- categories -->
+							<ul>
+								{% for tag in job.tags %}
+									<li class='badge badge-pill badge-secondary font-weight-light'>{{tag.name}}</li>
+								{% endfor %}    
+							</ul>
+							<!-- end categories -->
 							
 						</div>
 						<hr>

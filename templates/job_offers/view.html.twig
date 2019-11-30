@@ -86,10 +86,9 @@
             
             <!-- categories -->
             <ul>
-                
-                <li class='badge badge-pill badge-secondary font-weight-light'>TODO</li>
-                    
-
+                {% for tag in job.tags %}
+                    <li class='badge badge-pill badge-secondary font-weight-light'>{{tag.name}}</li>
+                {% endfor %}    
             </ul>
             <!-- end categories -->
             <hr>

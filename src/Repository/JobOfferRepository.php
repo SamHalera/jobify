@@ -44,6 +44,8 @@ class JobOfferRepository extends ServiceEntityRepository
         }
 
         return $qb
+            ->leftJoin('j.tags', 't')
+            ->addSelect('t')
             ->orderBy('j.createdAt', 'DESC')
             ->getQuery()
             ->getResult();
