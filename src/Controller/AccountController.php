@@ -6,21 +6,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-
 /**
- * @IsGranted("ROLE_ADMIN")
+ * @IsGranted("ROLE_USER")
  */
-class AdminController extends AbstractController
+
+class AccountController extends BaseController
 {
     /**
-     * @Route("/admin", name="admin")
-     * 
+     * @Route("/account", name="app_account")
      */
     public function index()
     {
-       
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+        //dd($this->getUser()->getEmail());
+        return $this->render('account/index.html.twig', [
+            'controller_name' => 'AccountController',
         ]);
     }
 }

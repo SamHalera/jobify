@@ -49,35 +49,41 @@
 
 					<ul class="navbar-nav ml-auto">
 
+						{% if is_granted('ROLE_USER') %}
+						
+							<li class="nav-item dropdown" style="margin-right: 50px;">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<img class="nav-profile-img rounded-circle" src="{{app.user.avatarUrl(100)}}">
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
-						<li class="nav-item dropdown" style="margin-right: 50px;">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<img class="nav-profile-img rounded-circle" src="{{ asset('images/astronaut-profile.png') }}">
-							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item" href="">Dashboard</a>
+									
+									
+									<a class="dropdown-item" href="">Dashboard</a>
 
-								<a class="dropdown-item" href="">Profile</a>
+									<a class="dropdown-item" href="{{path('app_account')}}">Profile</a>
+										
+									{% if is_granted('ROLE_RECRUITER') %}
+										<a class='dropdown-item' href="{{path('app_recruiter_joboffer_new')}}">Ajouter une annonce</a>
 
-
-								<a class='dropdown-item' href="{{path('app_recruiter_joboffer_new')}}">Ajouter une annonce</a>
-
-								<a class='dropdown-item' href="{{path('app_recruiter_jobs_list')}}">Admin annonces</a>
-
-
-								<a class="dropdown-item" href="{{path('app_logout')}}">Logout</a>
-							</div>
-						</li>
+										<a class='dropdown-item' href="{{path('app_recruiter_jobs_list')}}">Admin annonces</a>
+									{% endif %}
+									
 
 
-						<li class="nav-item">
-							<a style="color: #fff;" class="nav-link" href="{{path('app_login')}}">Login</a>
-						</li>
+									<a class="dropdown-item" href="{{path('app_logout')}}">Logout</a>
+								</div>
+							</li>
+						
+						{% else %}
+							<li class="nav-item">
+								<a style="color: #fff;" class="nav-link" href="{{path('app_login')}}">Login</a>
+							</li>
 
-						<li class="nav-item">
-							<a style="color: #fff;" class="nav-link" href="">Register</a>
-						</li>
-
+							<li class="nav-item">
+								<a style="color: #fff;" class="nav-link" href="">Register</a>
+							</li>
+						{% endif %}
 
 					</ul>
 				</div>
@@ -132,14 +138,19 @@
 		<div class='container-fluid'> 
 			{% block body %}{% endblock %}
 			
-			<div class='sticky-container'>
+			{% if is_granted('ROLE_RECRUITER') %}
+				<div class='sticky-container'>
 
-				<a href='{{ path('app_recruiter_joboffer_new')}}' id='btn-circle' class='btn sticky'>
-					<i class='el-icon-plus'></i>
-				</a><br>
-				<small>nouvelle offre</small>
-				</a>
-			</div>
+					<a href='{{ path('app_recruiter_joboffer_new')}}' id='btn-circle' class='btn sticky'>
+						<i class='el-icon-plus'></i>
+					</a><br>
+					<small>nouvelle offre</small>
+					</a>
+				</div>
+			
+			{% endif %}
+			
+			
 		</div>
 
 			<hr>
