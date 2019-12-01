@@ -1,7 +1,7 @@
-.square, .btn {
+/*.square, .btn {
     border-radius: 0px!important;
 }
-
+*/
 /* -- color classes -- */
 .spacepurplebg {
     background-color: #5b4f69;
@@ -78,10 +78,10 @@ div.user-menu-container .thumbnail {
     margin-top: 0;
 }
 
-.square, .btn {
+/*.square, .btn {
     border-radius: 0px!important;
 }
-
+*/
 /* -- media query for user profile image -- */
 @media (max-width: 767px) {
     .user-image {
