@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Application;
 use App\Entity\JobOffer;
+use App\Entity\User;
 use App\Repository\ApplicationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
@@ -14,16 +15,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-/**
- * @IsGranted("ROLE_RECRUITER")
- */
+
 class JobOfferRecruiterController extends AbstractController{
 
     /**
      * @Route("recruiter/jobs/new", name="app_recruiter_joboffer_new")
+     * @IsGranted("ROLE_RECRUITER")
      */
-    public function new(EntityManagerInterface $em){
+    public function new(EntityManagerInterface $em, Request $request){
 
+        
         $jobOffer = new JobOffer();
 
         $title = "Webdesigner Senior";
@@ -34,7 +35,7 @@ class JobOfferRecruiterController extends AbstractController{
             ->setTitle($title."-".rand(100,990))
             ->setContentMission($contentMisison)
             ->setContentRequirements($contentRequirements)
-            ->setAuthor('John Smith')
+            ->setAuthor($this->getUser())
             ->setImageFilename('dev1.jpg');
         
         $application1 = new Application();
@@ -57,7 +58,20 @@ class JobOfferRecruiterController extends AbstractController{
     }
 
     /**
-     * @Route("recruiter/jobs/list", name = "app_recruiter_jobs_list")
+     * @Route("/recruiter/jobs/edit/{id}", name="app_recruiter_job_edit")
+     * @IsGranted("MANAGE", subject="jobOffer")
+     *
+     */
+    public function edit(JobOffer $jobOffer)
+    {        
+        //check the VOTER SYSTEM => see in Security/voter
+        //$this->denyAccessUnlessGranted('MANAGE', $jobOffer);
+        
+        dd($jobOffer);
+    
+    }
+    /**
+     * @Route("recruiter/jobs/list", name= "app_recruiter_jobs_list")
      */
     public function list(EntityManagerInterface $em, Request $request){
 
