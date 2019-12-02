@@ -77,10 +77,7 @@ class JobOffer
      */
     private $slug;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $author;
+    
 
     /**
      * @ORM\Column(type="integer")
@@ -102,6 +99,12 @@ class JobOffer
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="jobOffers")
      */
     private $tags;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="jobOffers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
 
     
 
@@ -240,17 +243,6 @@ class JobOffer
         return $this;
     }
 
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
 
     public function getApplicationsCount(): ?int
     {
@@ -344,6 +336,18 @@ class JobOffer
         if ($this->tags->contains($tag)) {
             $this->tags->removeElement($tag);
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
