@@ -1,1 +1,25 @@
-hello
+{% extends "base.html.twig" %}
+
+{% block title %} Nouvelle offre d'emploi{% endblock %}
+
+{% block body %}
+     <div class='row justify-content-center'>
+        <div id="content" class="col-12">
+            <div class='jumbotron jumbotron-fluid text-center'>
+                <h1 class='display-3 mb-3'>Nouvelle offre d'emploi</h1>
+            </div>
+        </div>
+
+        <div class="col-10">
+
+           {{form_start(form)}}
+                {{form_widget(form)}}
+
+
+                <button class="btn btn-info" type="submit">enregistrer</button>
+           {{form_end(form)}}
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Application;
 use App\Entity\JobOffer;
 use App\Entity\User;
+use App\Form\JobOfferFormType;
 use App\Repository\ApplicationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
@@ -24,9 +25,31 @@ class JobOfferRecruiterController extends AbstractController{
      */
     public function new(EntityManagerInterface $em, Request $request){
 
-        
-        $jobOffer = new JobOffer();
 
+        $form = $this->createForm(JobOfferFormType::class);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+
+            $jobOffer = $form->getData();
+            //dd($data);
+            //$jobOffer = new JobOffer();
+            $jobOffer->setAuthor($this->getUser());
+
+            $em->persist($jobOffer);
+            $em->flush();
+
+            $this->addFlash('success', "L'offre d'emploi a bien été créée !");
+
+            return $this->redirectToRoute('app_recruiter_jobs_list');
+           
+        }
+
+        return $this->render('recruiter/new_job.html.twig', [
+            
+            'form'=>$form->createView()
+        ]);
+        /*
         $title = "Webdesigner Senior";
         $contentMisison = "This is the mission";
         $contentRequirements = "These are the requirements";
@@ -52,9 +75,10 @@ class JobOfferRecruiterController extends AbstractController{
         $em->persist($jobOffer);
         $em->persist($application1);
         $em->persist($application2);
-        $em->flush();
+        $em->flush(); 
+        */
 
-        return $this->redirectToRoute('app_recruiter_jobs_list');
+        
     }
 
     /**

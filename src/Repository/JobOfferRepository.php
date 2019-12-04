@@ -38,7 +38,7 @@ class JobOfferRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('j');
 
         if($term){
-            $qb->andWhere('j.title LIKE :term OR j.author LIKE :term')
+            $qb->andWhere('j.title LIKE :term')
                 ->setParameter('term', '%'.$term. '%')
                 ;
         }

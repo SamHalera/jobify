@@ -54,8 +54,6 @@ class JobOffer
      */
     private $contentRequirements;
 
-    
-
     /**
      * @ORM\Column(type="boolean")
      */
@@ -112,7 +110,7 @@ class JobOffer
     {
         $this->createdAt = new \DateTime();
         $this->isFilled = false;
-        $this->isPublished = true;
+        $this->isPublished = false;
         $this->applications = new ArrayCollection();
         $this->tags = new ArrayCollection();
     }

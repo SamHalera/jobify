@@ -28,6 +28,7 @@ composer require knplabs/knp-time-bundle
 
 composer require stof/doctrine-extensions-bundle
 
+composer require form
 
 --> FOSUser Bundle
 
