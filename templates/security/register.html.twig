@@ -6,22 +6,21 @@
     <link rel="stylesheet" href="{{asset('css/login.css')}}">
 {% endblock %}
 
-{% block title %}Registration{% endblock %}
+{% block title %}Enregistrez-vous{% endblock %}
 
 {% block body %}
+
+
+    <div id="content" class="col-12">
+        <div class='jumbotron jumbotron-fluid text-center'>
+            <h1 class='display-3 mb-3'>Enregistrez-vous</h1>
+            <h2 class='display-5 mb-3'>Vous êtes un candidat</h2>
+        </div>
+    </div>
     <form class="form-signin" method="post">
         {# SYmfony FORM later #}
         <h1 class="h3 mb-3 font-weight-normal">Enregistrez-vous</h1>
 
-        <div class="checkbox mb-3">
-            <h5>Vous êtes</h5>
-            <label class="mr-3">
-                <input type="checkbox" name="candidate"> Candidat
-            </label>
-            <label>
-                <input type="checkbox" name="recruiter"> Recruteur
-            </label>
-        </div>
         <div class="form-group">
             <label for="inputFirstname" class="sr-only">Votre prénom</label>
             <input type="text" value="" name="firstname" id="inputFirstname" class="form-control" placeholder="Votre prénom" required autofocus>

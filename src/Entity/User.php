@@ -57,6 +57,11 @@ class User implements UserInterface
      */
     private $jobOffers;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="user")
+     */
+    private $company;
+
     public function __construct()
     {
         $this->jobOffers = new ArrayCollection();
@@ -200,6 +205,18 @@ class User implements UserInterface
                 $jobOffer->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): self
+    {
+        $this->company = $company;
 
         return $this;
     }

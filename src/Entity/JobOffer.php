@@ -104,6 +104,12 @@ class JobOffer
      */
     private $author;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Field", inversedBy="jobOffers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $field;
+
     
 
     public function __construct()
@@ -346,6 +352,18 @@ class JobOffer
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getField(): ?Field
+    {
+        return $this->field;
+    }
+
+    public function setField(?Field $field): self
+    {
+        $this->field = $field;
 
         return $this;
     }

@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Company;
 use App\Entity\User;
+use App\Form\RecruiterRegistrationFormType;
 use App\Security\LoginFormAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,9 +47,49 @@ class SecurityController extends AbstractController
         
     }
 
+    /**
+     * @Route("/register-recruiter", name="app_register_recruiter")
+     * 
+     */
+    public function registerRecruiter(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator)
+    {
+       
+        $form = $this->createForm(RecruiterRegistrationFormType::class);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $user = $form->getData();
+            $user->setPassword($passwordEncoder->encodePassword(
+                $user,
+                $request->request->get('password')
+            ));
+
+            $user->setRoles(["ROLE_RECRUITER"]);
+
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash('success', "Bienvenue " . $user->getFirstname() ." !");
+
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $formAuthenticator,
+                'main'
+            );
+
+            
+        }
+
+        return $this->render('security/register_recruiter.html.twig', [
+            'registerRecruiterForm' => $form->createView()
+        ]);
+    }
     
     /**
-     * @Route("/register", name="app_register")
+     * @Route("/register-candidate", name="app_register")
      *
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator)
@@ -64,12 +106,8 @@ class SecurityController extends AbstractController
                 $user,
                 $request->request->get('password')
             ));
-
-            if($request->request->get('candidate')){
-                $user->setRoles(["ROLE_CANDIDATE"]);
-            } elseif($request->request->get('recruiter')) {
-                $user->setRoles(["ROLE_RECRUITER"]);
-            }
+            $user->setRoles(["ROLE_CANDIDATE"]);
+            
             $em->persist($user);
             $em->flush();
 
