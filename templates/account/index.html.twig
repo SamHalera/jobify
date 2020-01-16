@@ -12,6 +12,11 @@
         <div class="row user-menu-container square">
             <div class="col-md-12 user-details">
                 <div class="row spacepurplebg white">
+                    <div class="col-12 text-right mt-3">
+                        <a class="btn btn-labeled btn-info" href="{{path('app_edit_account', {id : app.user.id})}}">
+                            <span class="btn-label"><i class="el-icon-edit"></i></span>modifier
+                        </a>
+                    </div>
                     <div class="col-md-2 no-pad">
                         <div class="user-image">
                             <img src="{{app.user.avatarUrl}}" class="img-responsive thumbnail">
@@ -19,29 +24,48 @@
                     </div>
                     <div class="col-md-10 no-pad">
                         <div class="user-pad">
-                            <h3>{{app.user.firstname}}</h3>
+                            <h3>{{app.user.firstname}} {{app.user.lastname}}</h3>
                             <h4 class="white"><i class="el-icon-message"></i> {{app.user.email}}</h4>
-                            <a class="btn btn-labeled btn-info" href="#">
-                                <span class="btn-label"><i class="el-icon-edit"></i></span>modifier
-                            </a>
+                            <br>
+                            {% if app.user.company %}
+
+
+                                <h4>{{app.user.company.name}}</h4>
+                                
+                                <h5>Domaines</h5>
+                                <ul>
+                                    <li>Fiel 1</li>
+                                </ul>
+
+                                {% else %}
+                                
+                                <span class="h5">Société :</span> 
+                                <a class="btn btn-labeled btn-info" href="#">ajouter</a>
+
+                            {% endif %}
+                            
                         </div>
                     </div>
                 </div>
-                <div class="row overview">
+                <div class="row overview justify-content-center">
+                    
+                    {% if app.user.company %}
+                        <div class="col-md-10 user-pad">
+                            <h3 class="text-center mb-3">A propos de {{app.user.company.name}}</h3>
+                            <p>Lorem .....</p>
+                        </div>
+                    {% endif %}
+                    
                     <div class="col-md-4 user-pad text-center">
-                        <h3>COMMENTS</h3>
-                        <h4>184</h4>
-                    </div>
-                    <div class="col-md-4 user-pad text-center">
-                        <h3>ARTICLES READ</h3>
-                        <h4>1,910</h4>
-                    </div>
-                    <div class="col-md-4 user-pad text-center">
-                        <h3>LIKES</h3>
-                        <h4>3,892</h4>
+                        <h3>Dernières offres publiées</h3>
+                        <a class"btn btn-info" href="#">voir plus</a>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="row">
+
         </div>
     </div>
 
